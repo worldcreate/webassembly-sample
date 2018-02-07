@@ -1,0 +1,6 @@
+
+/target/
+**/*.rs.bk
+public/js/*.wasm
+.idea/
+node_modules

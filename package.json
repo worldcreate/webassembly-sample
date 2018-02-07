@@ -1,0 +1,14 @@
+{
+  "name": "webassembly-sample",
+  "version": "0.1.0",
+  "description": "webassembly sample",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server ./public"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
+}
