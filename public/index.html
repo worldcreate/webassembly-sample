@@ -3,16 +3,48 @@
 <head>
     <meta charset="utf-8">
     <script>
+      let instance;
       fetch('js/sum.wasm')
         .then((response) => response.arrayBuffer())
         .then((bytes) => WebAssembly.instantiate(bytes, {}))
         .then((results) => {
-          const instance = results.instance;
-          console.log(instance);
-          console.log(instance.exports.sum(2, 3));
+          instance = results.instance;
         });
+
+        function start_wasm() {
+            console.log("start");
+            let start = Date.now();
+            instance.exports.fib(40);
+            let result = (Date.now() - start);
+            console.log("end");
+
+            document.getElementById("wasmTime").innerHTML = result;
+        }
+
+        function start_js() {
+            console.log("start");
+            let start = Date.now();
+            js_fib(40);
+            let result = (Date.now() - start);
+            console.log("end");
+
+            document.getElementById("pureJsTime").innerHTML = result;
+
+        }
+
+        function js_fib(x) {
+            if (x == 1 || x == 2) {
+                return 1;
+            } else {
+                return js_fib(x - 1) + js_fib(x - 2);
+            }
+        }
     </script>
 </head>
 <body>
+<button onClick="start_js()">Pure JS</button>
+<button onClick="start_wasm()">WebAssembly</button>
+<div>Pure JS time is = <span id="pureJsTime"></span> ms.</div>
+<div>WebAssembly time is = <span id="wasmTime"></span> ms.</div>
 </body>
 </html>

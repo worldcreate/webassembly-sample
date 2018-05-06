@@ -1,8 +1,10 @@
 mod sum;
-use sum::sum;
+use sum::fib;
+use std::time::Instant;
 
 fn main() {
-    println!("Hello, world!");
-    println!("{}", sum(1, 3));
+    let now = Instant::now();
+    fib(40);
+    println!("{} ms.", now.elapsed().subsec_nanos() / 1000 / 1000);
 }
 
